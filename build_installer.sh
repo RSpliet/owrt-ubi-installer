@@ -235,16 +235,16 @@ linksys_e8450_installer() {
 	OPENWRT_TARGET="https://downloads.openwrt.org/snapshots/targets/mediatek/mt7622"
 	OPENWRT_IB="openwrt-imagebuilder-mediatek-mt7622.Linux-x86_64.tar.xz"
 	OPENWRT_INITRD="openwrt-mediatek-mt7622-linksys_e8450-ubi-initramfs-recovery.itb"
-	OPENWRT_REMOVE_PACKAGES="wpad-basic-wolfssl libustream-wolfssl* libwolfssl* px5g-wolfssl"
-	OPENWRT_ADD_PACKAGES=""
-	OPENWRT_ADD_REC_PACKAGES="wpad-openssl libustream-openssl luci luci-ssl-openssl luci-theme-openwrt-2020 kmod-mtd-rw"
+	OPENWRT_REMOVE_PACKAGES="wpad-basic-wolfssl libustream-wolfssl* libustream-mbedtls* wpad-basic-mbedtls libwolfssl* px5g-wolfssl"
+	OPENWRT_ADD_PACKAGES="adblock-fast luci-app-adblock-fast ip6tables-mod-nat kmod-ipt-nat6 gawk grep sed coreutils-sort bridger"
+	OPENWRT_ADD_REC_PACKAGES="wpad-openssl libustream-openssl luci luci-ssl-openssl luci-theme-openwrt-2020 kmod-mtd-rw powertop"
 	OPENWRT_ENABLE_SERVICE="uhttpd wpad"
 
 	OPENWRT_UPG_PACKAGES="auc blockd kmod-usb-storage kmod-usb-storage-uas kmod-fs-vfat \
 				kmod-nls-base kmod-nls-cp437 kmod-nls-iso8859-1 kmod-nls-utf8 \
 				kmod-fs-ext4 kmod-fs-f2fs kmod-fs-exfat \
 				luci luci-ssl-openssl luci-theme-openwrt-2020 luci-app-attendedsysupgrade \
-				-libustream-wolfssl -wpad-basic-wolfssl -px5g-wolfssl libustream-openssl wpad-openssl \
+				-libustream-mbedtls -wpad-basic-mbedtls -px5g-wolfssl libustream-openssl wpad-openssl \
 				$OPENWRT_ADD_PACKAGES"
 
 	run_openwrt_ib
