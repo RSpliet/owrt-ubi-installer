@@ -2,7 +2,8 @@
 
 DESTDIR="$PWD"
 
-OPENWRT_PGP="0xCD84BCED626471F1"
+#OPENWRT_PGP="0xCD84BCED626471F1"
+OPENWRT_PGP="0x1D53D1877742E911"
 KEYSERVER="keyserver.ubuntu.com"
 INSTALLERDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 OPENWRT_DIR="${INSTALLERDIR}/openwrt-ib"
@@ -38,7 +39,7 @@ run_openwrt_ib() {
 	wget -c "${OPENWRT_TARGET}/${OPENWRT_IB}"
 	sha256sum -c sha256sums --ignore-missing || exit 1
 	mkdir -p "${OPENWRT_DIR}" || exit 1
-	tar -xJf "${INSTALLERDIR}/dl/${OPENWRT_IB}" -C "${OPENWRT_DIR}" --strip-components=1
+	tar -xf "${INSTALLERDIR}/dl/${OPENWRT_IB}" -C "${OPENWRT_DIR}" --strip-components=1
 	DTC="$(ls -1 ${OPENWRT_DIR}/build_dir/target-aarch64_cortex-a53_musl/linux-mediatek_mt7622/linux-*/scripts/dtc/dtc)"
 	[ -x "$DTC" ] || {
 		echo "can't find dtc executable in OpenWrt IB"
@@ -233,14 +234,14 @@ bundle_initrd() {
 
 linksys_e8450_installer() {
 	OPENWRT_TARGET="https://downloads.openwrt.org/snapshots/targets/mediatek/mt7622"
-	OPENWRT_IB="openwrt-imagebuilder-mediatek-mt7622.Linux-x86_64.tar.xz"
+	OPENWRT_IB="openwrt-imagebuilder-mediatek-mt7622.Linux-x86_64.tar.zst"
 	OPENWRT_INITRD="openwrt-mediatek-mt7622-linksys_e8450-ubi-initramfs-recovery.itb"
 	OPENWRT_REMOVE_PACKAGES="wpad-basic-wolfssl libustream-wolfssl* libustream-mbedtls* wpad-basic-mbedtls libwolfssl* px5g-wolfssl"
 	OPENWRT_ADD_PACKAGES="adblock-fast luci-app-adblock-fast ip6tables-mod-nat kmod-ipt-nat6 gawk grep sed coreutils-sort bridger"
 	OPENWRT_ADD_REC_PACKAGES="wpad-openssl libustream-openssl luci luci-ssl-openssl luci-theme-openwrt-2020 kmod-mtd-rw powertop"
 	OPENWRT_ENABLE_SERVICE="uhttpd wpad"
 
-	OPENWRT_UPG_PACKAGES="auc blockd kmod-usb-storage kmod-usb-storage-uas kmod-fs-vfat \
+	OPENWRT_UPG_PACKAGES="owut blockd kmod-usb-storage kmod-usb-storage-uas kmod-fs-vfat \
 				kmod-nls-base kmod-nls-cp437 kmod-nls-iso8859-1 kmod-nls-utf8 \
 				kmod-fs-ext4 kmod-fs-f2fs kmod-fs-exfat \
 				luci luci-ssl-openssl luci-theme-openwrt-2020 luci-app-attendedsysupgrade \
